@@ -182,17 +182,13 @@ namespace Thrift.Transport
                     this.localCertificateSelectionCallback,
                     this.sslProtocols);
 
-                socket.setupTLS();
-
                 if (useBufferedSockets)
                 {
                     TBufferedTransport trans = new TBufferedTransport(socket);
                     return trans;
                 }
-                else
-                {
-                    return socket;
-                }
+
+                return socket;
 
             }
             catch (Exception ex)

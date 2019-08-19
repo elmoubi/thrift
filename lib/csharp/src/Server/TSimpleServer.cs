@@ -120,6 +120,12 @@ namespace Thrift.Server
                         processor = processorFactory.GetProcessor(client);
                         if (client != null)
                         {
+                            // establish time consuming SSL handshake here
+                            if (client is TTLSSocket tlsSocket)
+                            {
+                                tlsSocket.setupTLS();
+                            }
+
                             using (inputTransport = inputTransportFactory.GetTransport(client))
                             {
                                 using (outputTransport = outputTransportFactory.GetTransport(client))

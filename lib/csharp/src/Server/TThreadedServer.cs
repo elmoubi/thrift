@@ -140,7 +140,6 @@ namespace Thrift.Server
                         ++failureCount;
                         logDelegate(ttx.ToString());
                     }
-
                 }
             }
 
@@ -208,6 +207,11 @@ namespace Thrift.Server
                         inputProtocol = inputProtocolFactory.GetProtocol(inputTransport);
                         outputProtocol = outputProtocolFactory.GetProtocol(outputTransport);
 
+                        if (client is TTLSSocket tlsSocket)
+                        {
+                            tlsSocket.setupTLS();
+                        }
+
                         //Recover event handler (if any) and fire createContext server event when a client connects
                         if (serverEventHandler != null)
                             connectionContext = serverEventHandler.createContext(inputProtocol, outputProtocol);
@@ -248,7 +252,6 @@ namespace Thrift.Server
                         clientThreads.Remove(Thread.CurrentThread);
                         Monitor.Pulse(clientLock);
                     }
-
                 }
                 finally
                 {

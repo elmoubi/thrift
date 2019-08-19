@@ -356,13 +356,13 @@ namespace Thrift.Transport
                 if (isServer)
                 {
                     // Server authentication
-                    this.secureStream.AuthenticateAsServer(this.certificate, this.certValidator != null, sslProtocols, true);
+                    this.secureStream.AuthenticateAsServer(this.certificate, this.certValidator != null, sslProtocols, false);
                 }
                 else
                 {
                     // Client authentication
                     X509CertificateCollection certs = certificate != null ? new X509CertificateCollection { certificate } : new X509CertificateCollection();
-                    this.secureStream.AuthenticateAsClient(host, certs, sslProtocols, true);
+                    this.secureStream.AuthenticateAsClient(host, certs, sslProtocols, false);
                 }
             }
             catch (Exception)

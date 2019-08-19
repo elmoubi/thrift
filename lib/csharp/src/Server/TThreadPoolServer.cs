@@ -229,6 +229,11 @@ namespace Thrift.Server
                         inputProtocol = inputProtocolFactory.GetProtocol(inputTransport);
                         outputProtocol = outputProtocolFactory.GetProtocol(outputTransport);
 
+                        if (client is TTLSSocket tlsSocket)
+                        {
+                            tlsSocket.setupTLS();
+                        }
+
                         //Recover event handler (if any) and fire createContext server event when a client connects
                         if (serverEventHandler != null)
                             connectionContext = serverEventHandler.createContext(inputProtocol, outputProtocol);
@@ -263,7 +268,6 @@ namespace Thrift.Server
                     //Fire deleteContext server event after client disconnects
                     if (serverEventHandler != null)
                         serverEventHandler.deleteContext(connectionContext, inputProtocol, outputProtocol);
-
                 }
                 finally
                 {
