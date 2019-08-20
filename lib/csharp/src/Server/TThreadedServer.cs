@@ -207,10 +207,7 @@ namespace Thrift.Server
                         inputProtocol = inputProtocolFactory.GetProtocol(inputTransport);
                         outputProtocol = outputProtocolFactory.GetProtocol(outputTransport);
 
-                        if (client is TTLSSocket tlsSocket)
-                        {
-                            tlsSocket.setupTLS();
-                        }
+                        client.Initialize();
 
                         //Recover event handler (if any) and fire createContext server event when a client connects
                         if (serverEventHandler != null)

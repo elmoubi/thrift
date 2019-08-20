@@ -131,6 +131,11 @@ namespace Thrift.Transport
                 "Asynchronous operations are not supported by this transport.");
         }
 
+        public virtual void Initialize()
+        {
+        }
+
+
         #region " IDisposable Support "
         // IDisposable
         protected abstract void Dispose(bool disposing);

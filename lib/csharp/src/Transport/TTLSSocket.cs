@@ -441,5 +441,10 @@ namespace Thrift.Transport
                 this.secureStream = null;
             }
         }
+
+        public override void Initialize()
+        {
+            this.setupTLS();
+        }
     }
 }
